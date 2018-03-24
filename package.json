@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "node server/server.js",
     "serve": "live-server public/",
     "build:dev": "webpack",
     "build:prod": "webpack -p --env production",
@@ -11,7 +12,8 @@
     "eslint": "eslint './src/**/*.js'",
     "eslint-fix": "eslint --fix './src/**/*.js'",
     "prettier": "prettier --write './{src,server}/**/*.js'",
-    "test": "jest --config=jest.config.json"
+    "test": "jest --config=jest.config.json",
+    "heroku-postbuild": "yarn run build:prod"
   },
   "dependencies": {
     "babel-cli": "6.24.1",
