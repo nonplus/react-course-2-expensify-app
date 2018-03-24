@@ -22,9 +22,9 @@ export const EditExpensePage = ({
   return (
     <div>
       <h1>Edit Expense</h1>
-      { expense && <ExpenseForm expense={expense} onSubmit={onSubmit} />}
-      { expense && <button onClick={onRemove}>Remove</button> }
-      { !expense && <p>This expense does not exist!</p> }
+      {expense && <ExpenseForm expense={expense} onSubmit={onSubmit} />}
+      {expense && <button onClick={onRemove}>Remove</button>}
+      {!expense && <p>This expense does not exist!</p>}
     </div>
   );
 };
