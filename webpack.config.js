@@ -9,7 +9,7 @@ module.exports = (env, argv) => {
   const CSSExtract = new ExtractTextPlugin("styles.css");
 
   return {
-    entry: './src/app.js',
+    entry: ["babel-polyfill", './src/app.js'],
     output: {
       path: distFolder,
       filename: 'bundle.js'
