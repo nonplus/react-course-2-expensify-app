@@ -1,6 +1,4 @@
-node_modules
 .vscode
 .idea
-public/bundle.js
-public/styles.css
-*.map
+node_modules/
+public/dist/
