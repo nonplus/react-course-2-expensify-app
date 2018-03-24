@@ -1,0 +1,33 @@
+{
+  "extends": [
+    "standard",
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/flowtype",
+    "prettier/react",
+    "prettier/standard"
+  ],
+  "plugins": [
+    "flowtype",
+    "react",
+    "prettier",
+    "standard"
+  ],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "sort-imports": ["error", {
+      "ignoreCase": false,
+      "ignoreMemberSort": false,
+      "memberSyntaxSortOrder": ["none", "all", "single", "multiple"]
+    }]
+  }
+}

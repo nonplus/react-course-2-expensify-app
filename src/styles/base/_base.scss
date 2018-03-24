@@ -1,0 +1,19 @@
+html {
+  // font-size: 62.5%;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+button {
+  cursor: pointer;
+  &:disabled {
+    cursor: default;
+  }
+}
+
+
+.is-active {
+  font-weight: bold;
+}
