@@ -5,15 +5,15 @@ import moment from "moment";
 import { AddExpensePage } from "../../components/AddExpensePage";
 
 describe("<AddExpensePage />", () => {
-  let addExpense, history, wrapper;
+  let startAddExpense, history, wrapper;
 
   beforeEach(() => {
-    addExpense = jest.fn();
+    startAddExpense = jest.fn();
     history = {
       push: jest.fn()
     };
     wrapper = shallow(
-      <AddExpensePage addExpense={addExpense} history={history} />
+      <AddExpensePage startAddExpense={startAddExpense} history={history} />
     );
   });
 
@@ -22,12 +22,18 @@ describe("<AddExpensePage />", () => {
   });
 
   describe("onSubmit", () => {
-    it("should call props.addExpense(expense)", () => {
+    let startAddExpensePromise;
+    beforeEach(() => {
+      startAddExpensePromise = Promise.resolve();
+      startAddExpense.mockImplementation(() => startAddExpensePromise);
       wrapper.find("ExpenseForm").prop("onSubmit")(expenses[1]);
-      expect(addExpense).toHaveBeenLastCalledWith(expenses[1]);
     });
-    it("should call history.push('/')", () => {
-      wrapper.find("ExpenseForm").prop("onSubmit")(expenses[1]);
+
+    it("should call props.startAddExpense(expense)", () => {
+      expect(startAddExpense).toHaveBeenLastCalledWith(expenses[1]);
+    });
+    it("should call history.push('/')", async () => {
+      await startAddExpensePromise;
       expect(history.push).toHaveBeenLastCalledWith("/");
     });
   });
