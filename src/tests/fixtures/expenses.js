@@ -4,14 +4,14 @@ const momentStart = moment(0);
 
 export default [
   {
-    id: "1",
+    id: "id_1",
     description: "Gum",
     note: "",
     amount: 195,
     createdAt: moment(momentStart).valueOf()
   },
   {
-    id: "2",
+    id: "id_2",
     description: "Rent",
     note: "",
     amount: 109500,
@@ -20,7 +20,7 @@ export default [
       .valueOf()
   },
   {
-    id: "3",
+    id: "id_3",
     description: "Credit Card",
     note: "",
     amount: 4500,

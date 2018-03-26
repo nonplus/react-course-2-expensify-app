@@ -8,10 +8,17 @@ describe("expensesReducer", () => {
     });
   });
 
+  describe("SET_EXPENSES", () => {
+    it("should replace expenses", () => {
+      const action = { type: "SET_EXPENSES", expenses };
+      expect(expensesReducer([expenses[1]], action)).toEqual(expenses);
+    });
+  });
+
   describe("REMOVE_EXPENSE", () => {
     describe("when existing id specified", () => {
       it("should remove matching expense", () => {
-        const action = { type: "REMOVE_EXPENSE", id: "2" };
+        const action = { type: "REMOVE_EXPENSE", id: expenses[1].id };
         expect(expensesReducer(expenses, action)).toEqual([
           expenses[0],
           expenses[2]
@@ -51,7 +58,7 @@ describe("expensesReducer", () => {
 
     describe("with existing id", () => {
       it("should update the expense", () => {
-        const action = { type: "EDIT_EXPENSE", id: "2", updates };
+        const action = { type: "EDIT_EXPENSE", id: expenses[1].id, updates };
         expect(expensesReducer(expenses, action)).toEqual([
           expenses[0],
           { ...expenses[1], ...updates },

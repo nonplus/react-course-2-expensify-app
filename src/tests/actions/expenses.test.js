@@ -2,7 +2,9 @@ import {
   addExpense,
   editExpense,
   removeExpense,
-  startAddExpense
+  startAddExpense,
+  setExpenses,
+  startSetExpenses
 } from "../../actions/expenses";
 import expenses from "../fixtures/expenses";
 import configureMockStore from "redux-mock-store";
@@ -10,6 +12,14 @@ import thunk from "redux-thunk";
 import database from "../../firebase/firebase";
 
 const createMockStore = configureMockStore([thunk]);
+
+beforeEach(async () => {
+  const expensesData = {};
+  expenses.forEach(({ id, description, note, amount, createdAt }) => {
+    expensesData[id] = { description, note, amount, createdAt };
+  });
+  await database.ref("expenses").set(expensesData);
+});
 
 describe("removeExpense", () => {
   it("should setup remove expense action object", () => {
@@ -48,23 +58,6 @@ describe("addExpense", () => {
       });
     });
   });
-
-  // describe("when values are undefined", () => {
-  //   it("should setup add expense action object with default values", () => {
-  //     const expenseData = {};
-  //     const action = addExpense(expenseData);
-  //     expect(action).toEqual({
-  //       type: "ADD_EXPENSE",
-  //       expense: {
-  //         description: "",
-  //         note: "",
-  //         amount: 0,
-  //         createdAt: 0,
-  //         id: expect.any(String)
-  //       }
-  //     });
-  //   });
-  // });
 });
 
 describe("startAddExpense", () => {
@@ -124,5 +117,31 @@ describe("startAddExpense", () => {
 
       expect(snapshot.val()).toEqual(expenseDefaults);
     });
+  });
+});
+
+describe("setExpenses", () => {
+  describe("when values are provided", () => {
+    it("should setup set expenses action object with provided values", () => {
+      const action = setExpenses(expenses);
+      expect(setExpenses(expenses)).toEqual({
+        type: "SET_EXPENSES",
+        expenses
+      });
+    });
+  });
+});
+
+describe("startSetExpenseS", () => {
+  it("should add expenses store", async () => {
+    const store = createMockStore({});
+    await store.dispatch(startSetExpenses());
+    const actions = store.getActions();
+    expect(actions).toEqual([
+      {
+        type: "SET_EXPENSES",
+        expenses
+      }
+    ]);
   });
 });

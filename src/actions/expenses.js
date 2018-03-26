@@ -1,5 +1,6 @@
 import uuid from "uuid";
 import database from "../firebase/firebase";
+import _ from "lodash";
 
 export const addExpense = expense => ({
   type: "ADD_EXPENSE",
@@ -17,6 +18,19 @@ export const startAddExpense = (expenseData = {}) => {
     const expense = { description, note, amount, createdAt };
     const ref = await database.ref("expenses").push(expense);
     await dispatch(addExpense({ id: ref.key, ...expense }));
+  };
+};
+
+export const setExpenses = expenses => ({
+  type: "SET_EXPENSES",
+  expenses
+});
+
+export const startSetExpenses = () => {
+  return async dispatch => {
+    const snapshot = await database.ref("expenses").once("value");
+    const expenses = _.map(snapshot.val(), (value, id) => ({ id, ...value }));
+    dispatch(setExpenses(expenses));
   };
 };
 
