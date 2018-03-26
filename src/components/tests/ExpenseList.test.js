@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { ExpenseList } from "../../components/ExpenseList";
-import expenses from "../fixtures/expenses";
+import { ExpenseList } from "../ExpenseList";
+import expenses from "../../tests/fixtures/expenses";
 
 describe("ExpenseList", () => {
   it("should remder list with expenses", () => {

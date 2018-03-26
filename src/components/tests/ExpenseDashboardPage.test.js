@@ -1,10 +1,10 @@
 import { shallow } from "enzyme";
 import React from "react";
-import NotFoundPage from "../../components/NotFoundPage";
+import ExpenseDashboardPage from "../ExpenseDashboardPage";
 
-describe("NotFoundPage", () => {
+describe("ExpenseDashboardPage", () => {
   it("should render page correctly", () => {
-    const wrapper = shallow(<NotFoundPage />);
+    const wrapper = shallow(<ExpenseDashboardPage />);
     expect(wrapper).toMatchSnapshot();
   });
 });

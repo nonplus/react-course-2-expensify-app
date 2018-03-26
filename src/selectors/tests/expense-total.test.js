@@ -1,5 +1,5 @@
-import { selectExpensesTotal } from "../../selectors/expenses-total";
-import expenses from "../fixtures/expenses";
+import { selectExpensesTotal } from "../expenses-total";
+import expenses from "../../tests/fixtures/expenses";
 
 describe("selectExpensesTotal", () => {
   it("should return 0 for no expenses", () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { ExpenseSummary } from "../../components/ExpenseSummary";
+import { ExpenseSummary } from "../ExpenseSummary";
 
 describe("<ExpenseSummary />", () => {
   it("should render summary for 0 expenses", () => {

@@ -1,5 +1,5 @@
-import expensesReducer from "../../reducers/expenses";
-import expenses from "../fixtures/expenses";
+import expensesReducer from "../expenses";
+import expenses from "../../tests/fixtures/expenses";
 
 describe("expensesReducer", () => {
   describe("@@INIT", () => {

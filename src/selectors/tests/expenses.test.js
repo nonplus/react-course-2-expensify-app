@@ -1,6 +1,6 @@
-import { selectExpenses } from "../../selectors/expenses";
+import { selectExpenses } from "../expenses";
 import moment from "moment";
-import expenses from "../fixtures/expenses";
+import expenses from "../../tests/fixtures/expenses";
 
 describe("selectExpenses", () => {
   describe("when text is specified", () => {

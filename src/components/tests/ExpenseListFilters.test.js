@@ -1,9 +1,9 @@
 import React from "react";
 import { shallow } from "enzyme";
-import expenses from "../fixtures/expenses";
-import { filters, altFilters } from "../fixtures/filters";
+import expenses from "../../tests/fixtures/expenses";
+import { filters, altFilters } from "../../tests/fixtures/filters";
 import moment from "moment";
-import { ExpenseListFilters } from "../../components/ExpenseListFilters";
+import { ExpenseListFilters } from "../ExpenseListFilters";
 
 describe("<ExpenseListFilters />", () => {
   let wrapper,

@@ -1,6 +1,4 @@
-import filtersReducer, {
-  filtersReducerDefaultState
-} from "../../reducers/filters";
+import filtersReducer, { filtersReducerDefaultState } from "../filters";
 import moment from "moment";
 
 describe("filtersReducer", () => {

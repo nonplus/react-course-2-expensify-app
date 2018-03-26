@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
-import ExpenseForm from "../../components/ExpenseForm";
-import expenses from "../fixtures/expenses";
+import ExpenseForm from "../ExpenseForm";
+import expenses from "../../tests/fixtures/expenses";
 import moment from "moment";
 
 describe("<ExpenseForm />", () => {
