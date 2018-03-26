@@ -5,7 +5,7 @@ exports[`ExpenseListItem should remder list it with expense 1`] = `
   <h3>
     <Link
       replace={false}
-      to="edit/1"
+      to="edit/id_1"
     >
       Gum
     </Link>

@@ -6,24 +6,24 @@ exports[`ExpenseList should remder list with expenses 1`] = `
     amount={195}
     createdAt={0}
     description="Gum"
-    id="1"
-    key="1"
+    id="id_1"
+    key="id_1"
     note=""
   />
   <ExpenseListItem
     amount={109500}
     createdAt={-345600000}
     description="Rent"
-    id="2"
-    key="2"
+    id="id_2"
+    key="id_2"
     note=""
   />
   <ExpenseListItem
     amount={4500}
     createdAt={345600000}
     description="Credit Card"
-    id="3"
-    key="3"
+    id="id_3"
+    key="id_3"
     note=""
   />
 </div>
