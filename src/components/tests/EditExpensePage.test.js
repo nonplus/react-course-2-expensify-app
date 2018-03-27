@@ -5,20 +5,20 @@ import moment from "moment";
 import { EditExpensePage } from "../EditExpensePage";
 
 describe("<EditExpensePage />", () => {
-  let startEditExpense, startRemoveExpense, history, wrapper, expense;
+  let editExpenseAsync, removeExpenseAsync, history, wrapper, expense;
 
   beforeEach(() => {
     expense = { ...expenses[1] };
-    startEditExpense = jest.fn();
-    startRemoveExpense = jest.fn();
+    editExpenseAsync = jest.fn();
+    removeExpenseAsync = jest.fn();
     history = {
       push: jest.fn()
     };
     wrapper = shallow(
       <EditExpensePage
         expense={expense}
-        startEditExpense={startEditExpense}
-        startRemoveExpense={startRemoveExpense}
+        editExpenseAsync={editExpenseAsync}
+        removeExpenseAsync={removeExpenseAsync}
         history={history}
       />
     );
@@ -29,36 +29,36 @@ describe("<EditExpensePage />", () => {
   });
 
   describe("ExpenseForm.onSubmit", () => {
-    let startEditExpensePromise;
+    let editExpenseAsyncPromise;
     beforeEach(() => {
-      startEditExpensePromise = Promise.resolve(undefined);
-      startEditExpense.mockReturnValue(startEditExpensePromise);
+      editExpenseAsyncPromise = Promise.resolve(undefined);
+      editExpenseAsync.mockReturnValue(editExpenseAsyncPromise);
     });
-    it("should call props.startEditExpense(expense)", () => {
+    it("should call props.editExpenseAsync(expense)", () => {
       const updates = { ...expense };
       delete updates.id;
       wrapper.find("ExpenseForm").prop("onSubmit")(updates);
-      expect(startEditExpense).toHaveBeenLastCalledWith(expense.id, updates);
+      expect(editExpenseAsync).toHaveBeenLastCalledWith(expense.id, updates);
     });
     it("should call history.push('/')", async () => {
       wrapper.find("ExpenseForm").prop("onSubmit")(expenses[1]);
-      await startEditExpensePromise;
+      await editExpenseAsyncPromise;
       expect(history.push).toHaveBeenLastCalledWith("/");
     });
   });
 
   describe("button.onClick", () => {
-    const startRemoveExpensePromise = Promise.resolve(undefined);
+    const removeExpenseAsyncPromise = Promise.resolve(undefined);
     beforeEach(() => {
-      startRemoveExpense.mockReturnValue(startRemoveExpensePromise);
+      removeExpenseAsync.mockReturnValue(removeExpenseAsyncPromise);
     });
     it("should call props.removeExpense(expense)", () => {
       wrapper.find("button").prop("onClick")();
-      expect(startRemoveExpense).toHaveBeenLastCalledWith({ id: expense.id });
+      expect(removeExpenseAsync).toHaveBeenLastCalledWith({ id: expense.id });
     });
     it("should call history.push('/')", async () => {
       wrapper.find("button").prop("onClick")();
-      await startRemoveExpensePromise;
+      await removeExpenseAsyncPromise;
       expect(history.push).toHaveBeenLastCalledWith("/");
     });
   });

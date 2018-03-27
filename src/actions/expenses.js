@@ -7,7 +7,7 @@ export const addExpense = expense => ({
   expense
 });
 
-export const startAddExpense = (expenseData = {}) => {
+export const addExpenseAsync = (expenseData = {}) => {
   return async dispatch => {
     const {
       description = "",
@@ -26,7 +26,7 @@ export const setExpenses = expenses => ({
   expenses
 });
 
-export const startSetExpenses = () => {
+export const setExpenseAsync = () => {
   return async dispatch => {
     const snapshot = await database.ref("expenses").once("value");
     const expenses = _.map(snapshot.val(), (value, id) => ({ id, ...value }));
@@ -48,7 +48,7 @@ export const editExpense = (id, updates) => {
   };
 };
 
-export const startEditExpense = (id, updates) => {
+export const editExpenseAsync = (id, updates) => {
   const { description, note, amount, createdAt } = updates;
   return async dispatch => {
     await database
@@ -63,7 +63,7 @@ export const removeExpense = ({ id } = {}) => ({
   id
 });
 
-export const startRemoveExpense = ({ id } = {}) => {
+export const removeExpenseAsync = ({ id } = {}) => {
   return async dispatch => {
     await database.ref(`expenses/${id}`).remove();
     dispatch(removeExpense({ id }));

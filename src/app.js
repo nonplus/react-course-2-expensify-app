@@ -7,7 +7,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { Provider } from "react-redux";
-import { addExpense, startSetExpenses } from "./actions/expenses";
+import { addExpense, setExpenseAsync } from "./actions/expenses";
 import { setTextFilter } from "./actions/filters";
 import { selectExpenses } from "./selectors/expenses";
 import "normalize.css/normalize.css";
@@ -28,6 +28,6 @@ const appRoot = document.getElementById("app");
 
 ReactDOM.render(<p>Loading...</p>, appRoot);
 
-store.dispatch(startSetExpenses()).then(() => {
+store.dispatch(setExpenseAsync()).then(() => {
   ReactDOM.render(jsx, appRoot);
 });

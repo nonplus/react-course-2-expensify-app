@@ -2,11 +2,11 @@ import {
   addExpense,
   editExpense,
   removeExpense,
-  startAddExpense,
+  addExpenseAsync,
   setExpenses,
-  startSetExpenses,
-  startRemoveExpense,
-  startEditExpense
+  setExpenseAsync,
+  removeExpenseAsync,
+  editExpenseAsync
 } from "../expenses";
 import * as _ from "lodash";
 import expenses from "../../tests/fixtures/expenses";
@@ -34,12 +34,12 @@ describe("removeExpense", () => {
   });
 });
 
-describe("startRemoveExpense", () => {
+describe("removeExpenseAsync", () => {
   it("should remove expense from database and store", async () => {
     const store = createMockStore({});
     const id = expenses[1].id;
 
-    await store.dispatch(startRemoveExpense({ id }));
+    await store.dispatch(removeExpenseAsync({ id }));
 
     const actions = store.getActions();
     expect(actions).toEqual([
@@ -73,7 +73,7 @@ describe("editExpense", () => {
   });
 });
 
-describe("startEditExpense", () => {
+describe("editExpenseAsync", () => {
   it("should update expense in database and store", async () => {
     const store = createMockStore({});
     const updates = {
@@ -84,7 +84,7 @@ describe("startEditExpense", () => {
     };
     const id = expenses[1].id;
 
-    await store.dispatch(startEditExpense(id, updates));
+    await store.dispatch(editExpenseAsync(id, updates));
 
     const actions = store.getActions();
     expect(actions).toEqual([
@@ -113,7 +113,7 @@ describe("addExpense", () => {
   });
 });
 
-describe("startAddExpense", () => {
+describe("addExpenseAsync", () => {
   describe("when values are provided", () => {
     it("should add expense to database and store", async () => {
       const store = createMockStore({});
@@ -124,7 +124,7 @@ describe("startAddExpense", () => {
         createdAt: 34567
       };
 
-      await store.dispatch(startAddExpense(expenseData));
+      await store.dispatch(addExpenseAsync(expenseData));
       const actions = store.getActions();
       expect(actions).toEqual([
         {
@@ -153,7 +153,7 @@ describe("startAddExpense", () => {
         createdAt: 0
       };
 
-      await store.dispatch(startAddExpense({}));
+      await store.dispatch(addExpenseAsync({}));
       const actions = store.getActions();
       expect(actions).toEqual([
         {
@@ -185,10 +185,10 @@ describe("setExpenses", () => {
   });
 });
 
-describe("startSetExpenseS", () => {
+describe("setExpenseAsync", () => {
   it("should add expenses store", async () => {
     const store = createMockStore({});
-    await store.dispatch(startSetExpenses());
+    await store.dispatch(setExpenseAsync());
     const actions = store.getActions();
     expect(actions).toEqual([
       {

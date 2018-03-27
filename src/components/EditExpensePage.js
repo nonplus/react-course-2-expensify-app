@@ -1,21 +1,21 @@
 import React from "react";
 import ExpenseForm from "./ExpenseForm";
 import { connect } from "react-redux";
-import { startEditExpense, startRemoveExpense } from "../actions/expenses";
+import { editExpenseAsync, removeExpenseAsync } from "../actions/expenses";
 
 export const EditExpensePage = ({
-  startEditExpense,
-  startRemoveExpense,
+  editExpenseAsync,
+  removeExpenseAsync,
   history,
   expense
 }) => {
   const onSubmit = async changedExpense => {
-    await startEditExpense(expense.id, changedExpense);
+    await editExpenseAsync(expense.id, changedExpense);
     history.push("/");
   };
 
   const onRemove = async () => {
-    await startRemoveExpense({ id: expense.id });
+    await removeExpenseAsync({ id: expense.id });
     history.push("/");
   };
 
@@ -34,9 +34,9 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  startEditExpense: (id, changedExpense) =>
-    dispatch(startEditExpense(id, changedExpense)),
-  startRemoveExpense: expense => dispatch(startRemoveExpense(expense))
+  editExpenseAsync: (id, changedExpense) =>
+    dispatch(editExpenseAsync(id, changedExpense)),
+  removeExpenseAsync: expense => dispatch(removeExpenseAsync(expense))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditExpensePage);
