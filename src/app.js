@@ -2,7 +2,7 @@ import "normalize.css/normalize.css";
 import "./styles/styles.scss";
 
 import configureStore from "./store/configureStore";
-import AppRouter from "./routers/AppRouter";
+import AppRouter, { history } from "./routers/AppRouter";
 import React from "react";
 import ReactDOM from "react-dom";
 
@@ -13,6 +13,7 @@ import { selectExpenses } from "./selectors/expenses";
 import "normalize.css/normalize.css";
 import "./styles/styles.scss";
 import "react-dates/lib/css/_datepicker.css";
+import { firebase } from "./firebase/firebase";
 
 const store = configureStore();
 
@@ -24,10 +25,28 @@ const jsx = (
   </Provider>
 );
 
+let hasRendered = false;
+const renderApp = () => {
+  if (!hasRendered) {
+    ReactDOM.render(jsx, appRoot);
+    hasRendered = true;
+  }
+};
+
 const appRoot = document.getElementById("app");
 
 ReactDOM.render(<p>Loading...</p>, appRoot);
 
-store.dispatch(setExpenseAsync()).then(() => {
-  ReactDOM.render(jsx, appRoot);
+firebase.auth().onAuthStateChanged(async user => {
+  if (user) {
+    console.log("logged in", user);
+    await store.dispatch(setExpenseAsync());
+    renderApp();
+    if (history.location.pathname === "/") {
+      history.push("/dashboard");
+    }
+  } else {
+    renderApp();
+    history.push("/");
+  }
 });
