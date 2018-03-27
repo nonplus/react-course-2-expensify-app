@@ -57,8 +57,8 @@ module.exports = (env, argv) => {
         "process.env.FIREBASE_API_KEY": JSON.stringify(
           process.env.FIREBASE_API_KEY
         ),
-        "process.env.FIREBAE_AUTH_DOMAIN": JSON.stringify(
-          process.env.FIREBAE_AUTH_DOMAIN
+        "process.env.FIREBASE_AUTH_DOMAIN": JSON.stringify(
+          process.env.FIREBASE_AUTH_DOMAIN
         ),
         "process.env.FIREBASE_DATABASE_URL": JSON.stringify(
           process.env.FIREBASE_DATABASE_URL
