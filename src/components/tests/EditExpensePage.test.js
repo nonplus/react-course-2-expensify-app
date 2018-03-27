@@ -5,12 +5,12 @@ import moment from "moment";
 import { EditExpensePage } from "../EditExpensePage";
 
 describe("<EditExpensePage />", () => {
-  let editExpense, removeExpense, history, wrapper, expense;
+  let editExpense, startRemoveExpense, history, wrapper, expense;
 
   beforeEach(() => {
     expense = { ...expenses[1] };
     editExpense = jest.fn();
-    removeExpense = jest.fn();
+    startRemoveExpense = jest.fn();
     history = {
       push: jest.fn()
     };
@@ -18,7 +18,7 @@ describe("<EditExpensePage />", () => {
       <EditExpensePage
         expense={expense}
         editExpense={editExpense}
-        removeExpense={removeExpense}
+        startRemoveExpense={startRemoveExpense}
         history={history}
       />
     );
@@ -42,12 +42,17 @@ describe("<EditExpensePage />", () => {
   });
 
   describe("button.onClick", () => {
+    const startRemoveExpensePromise = Promise.resolve(undefined);
+    beforeEach(() => {
+      startRemoveExpense.mockReturnValue(startRemoveExpensePromise);
+    });
     it("should call props.removeExpense(expense)", () => {
       wrapper.find("button").prop("onClick")();
-      expect(removeExpense).toHaveBeenLastCalledWith({ id: expense.id });
+      expect(startRemoveExpense).toHaveBeenLastCalledWith({ id: expense.id });
     });
-    it("should call history.push('/')", () => {
+    it("should call history.push('/')", async () => {
       wrapper.find("button").prop("onClick")();
+      await startRemoveExpensePromise;
       expect(history.push).toHaveBeenLastCalledWith("/");
     });
   });

@@ -4,8 +4,10 @@ import {
   removeExpense,
   startAddExpense,
   setExpenses,
-  startSetExpenses
+  startSetExpenses,
+  startRemoveExpense
 } from "../expenses";
+import * as _ from "lodash";
 import expenses from "../../tests/fixtures/expenses";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
@@ -27,6 +29,29 @@ describe("removeExpense", () => {
     expect(action).toEqual({
       type: "REMOVE_EXPENSE",
       id: "123abc"
+    });
+  });
+});
+
+describe("startRemoveExpense", () => {
+  it("should remove expense from database and store", async () => {
+    const store = createMockStore({});
+    const id = expenses[1].id;
+
+    await store.dispatch(startRemoveExpense({ id }));
+
+    const actions = store.getActions();
+    expect(actions).toEqual([
+      {
+        type: "REMOVE_EXPENSE",
+        id
+      }
+    ]);
+
+    const snapshot = await database.ref(`expenses`).once("value");
+    expect(snapshot.val()).toEqual({
+      [expenses[0].id]: _.omit(expenses[0], "id"),
+      [expenses[2].id]: _.omit(expenses[2], "id")
     });
   });
 });
