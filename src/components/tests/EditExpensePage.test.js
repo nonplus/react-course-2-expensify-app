@@ -5,11 +5,11 @@ import moment from "moment";
 import { EditExpensePage } from "../EditExpensePage";
 
 describe("<EditExpensePage />", () => {
-  let editExpense, startRemoveExpense, history, wrapper, expense;
+  let startEditExpense, startRemoveExpense, history, wrapper, expense;
 
   beforeEach(() => {
     expense = { ...expenses[1] };
-    editExpense = jest.fn();
+    startEditExpense = jest.fn();
     startRemoveExpense = jest.fn();
     history = {
       push: jest.fn()
@@ -17,7 +17,7 @@ describe("<EditExpensePage />", () => {
     wrapper = shallow(
       <EditExpensePage
         expense={expense}
-        editExpense={editExpense}
+        startEditExpense={startEditExpense}
         startRemoveExpense={startRemoveExpense}
         history={history}
       />
@@ -29,14 +29,20 @@ describe("<EditExpensePage />", () => {
   });
 
   describe("ExpenseForm.onSubmit", () => {
-    it("should call props.editExpense(expense)", () => {
+    let startEditExpensePromise;
+    beforeEach(() => {
+      startEditExpensePromise = Promise.resolve(undefined);
+      startEditExpense.mockReturnValue(startEditExpensePromise);
+    });
+    it("should call props.startEditExpense(expense)", () => {
       const updates = { ...expense };
       delete updates.id;
       wrapper.find("ExpenseForm").prop("onSubmit")(updates);
-      expect(editExpense).toHaveBeenLastCalledWith(expense.id, updates);
+      expect(startEditExpense).toHaveBeenLastCalledWith(expense.id, updates);
     });
-    it("should call history.push('/')", () => {
+    it("should call history.push('/')", async () => {
       wrapper.find("ExpenseForm").prop("onSubmit")(expenses[1]);
+      await startEditExpensePromise;
       expect(history.push).toHaveBeenLastCalledWith("/");
     });
   });

@@ -5,7 +5,8 @@ import {
   startAddExpense,
   setExpenses,
   startSetExpenses,
-  startRemoveExpense
+  startRemoveExpense,
+  startEditExpense
 } from "../expenses";
 import * as _ from "lodash";
 import expenses from "../../tests/fixtures/expenses";
@@ -69,6 +70,33 @@ describe("editExpense", () => {
         note: "note"
       }
     });
+  });
+});
+
+describe("startEditExpense", () => {
+  it("should update expense in database and store", async () => {
+    const store = createMockStore({});
+    const updates = {
+      description: "description",
+      amount: 12345,
+      note: "note",
+      createdAt: 34567
+    };
+    const id = expenses[1].id;
+
+    await store.dispatch(startEditExpense(id, updates));
+
+    const actions = store.getActions();
+    expect(actions).toEqual([
+      {
+        type: "EDIT_EXPENSE",
+        id,
+        updates
+      }
+    ]);
+
+    const snapshot = await database.ref(`expenses/${id}`).once("value");
+    expect(snapshot.val()).toEqual(updates);
   });
 });
 
