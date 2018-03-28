@@ -44,8 +44,8 @@ firebase.auth().onAuthStateChanged(async user => {
     store.dispatch(login(user.uid));
     await store.dispatch(setExpenseAsync());
     renderApp();
-    if (history.location.pathname === "/") {
-      history.push("/dashboard");
+    if (history.location.pathname === "/login") {
+      history.push("/");
     }
   } else {
     console.log("logged out");
