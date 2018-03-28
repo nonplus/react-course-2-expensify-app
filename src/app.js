@@ -14,6 +14,7 @@ import "normalize.css/normalize.css";
 import "./styles/styles.scss";
 import "react-dates/lib/css/_datepicker.css";
 import { firebase } from "./firebase/firebase";
+import { login, logout } from "./actions/auth";
 
 const store = configureStore();
 
@@ -40,12 +41,14 @@ ReactDOM.render(<p>Loading...</p>, appRoot);
 firebase.auth().onAuthStateChanged(async user => {
   if (user) {
     console.log("logged in", user);
+    store.dispatch(login(user.uid));
     await store.dispatch(setExpenseAsync());
     renderApp();
     if (history.location.pathname === "/") {
       history.push("/dashboard");
     }
   } else {
+    store.dispatch(logout());
     renderApp();
     history.push("/");
   }
