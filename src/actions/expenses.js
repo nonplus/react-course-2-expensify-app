@@ -2,13 +2,16 @@ import uuid from "uuid";
 import database from "../firebase/firebase";
 import _ from "lodash";
 
+const expensesRef = (getState, path = "") =>
+  database.ref(`users/${getState().auth.uid}/expenses/${path}`);
+
 export const addExpense = expense => ({
   type: "ADD_EXPENSE",
   expense
 });
 
 export const addExpenseAsync = (expenseData = {}) => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     const {
       description = "",
       note = "",
@@ -16,7 +19,7 @@ export const addExpenseAsync = (expenseData = {}) => {
       createdAt = 0
     } = expenseData;
     const expense = { description, note, amount, createdAt };
-    const ref = await database.ref("expenses").push(expense);
+    const ref = await expensesRef(getState).push(expense);
     await dispatch(addExpense({ id: ref.key, ...expense }));
   };
 };
@@ -27,8 +30,8 @@ export const setExpenses = expenses => ({
 });
 
 export const setExpenseAsync = () => {
-  return async dispatch => {
-    const snapshot = await database.ref("expenses").once("value");
+  return async (dispatch, getState) => {
+    const snapshot = await expensesRef(getState).once("value");
     const expenses = _.map(snapshot.val(), (value, id) => ({ id, ...value }));
     dispatch(setExpenses(expenses));
   };
@@ -50,10 +53,13 @@ export const editExpense = (id, updates) => {
 
 export const editExpenseAsync = (id, updates) => {
   const { description, note, amount, createdAt } = updates;
-  return async dispatch => {
-    await database
-      .ref(`expenses/${id}`)
-      .set({ description, note, amount, createdAt });
+  return async (dispatch, getState) => {
+    await expensesRef(getState, id).set({
+      description,
+      note,
+      amount,
+      createdAt
+    });
     dispatch(editExpense(id, updates));
   };
 };
@@ -64,8 +70,8 @@ export const removeExpense = ({ id } = {}) => ({
 });
 
 export const removeExpenseAsync = ({ id } = {}) => {
-  return async dispatch => {
-    await database.ref(`expenses/${id}`).remove();
+  return async (dispatch, getState) => {
+    await expensesRef(getState, id).remove();
     dispatch(removeExpense({ id }));
   };
 };
