@@ -1,7 +1,8 @@
 const expensesReducerDefaultState = [];
 const expensesReducer = (state = expensesReducerDefaultState, action) => {
-  // console.log(action);
   switch (action.type) {
+    case "LOGOUT":
+      return expensesReducerDefaultState;
     case "SET_EXPENSES":
       return action.expenses;
     case "ADD_EXPENSE":
