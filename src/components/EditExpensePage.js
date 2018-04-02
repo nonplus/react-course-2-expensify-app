@@ -21,10 +21,17 @@ export const EditExpensePage = ({
 
   return (
     <div>
-      <h1>Edit Expense</h1>
-      {expense && <ExpenseForm expense={expense} onSubmit={onSubmit} />}
-      {expense && <button onClick={onRemove}>Remove</button>}
-      {!expense && <p>This expense does not exist!</p>}
+      <div className="page-header">
+        <div className="content-container">
+          <h1 class="page-header__title">Edit Expense</h1>
+        </div>
+      </div>
+      <div className="content-container">
+        <ExpenseForm expense={expense} onSubmit={onSubmit} />
+        <button className="button button--secondary" onClick={onRemove}>
+          Remove Expense
+        </button>
+      </div>
     </div>
   );
 };

@@ -1,53 +1,149 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ExpenseSummary /> should render summary for 0 expenses 1`] = `
-<div>
-  <h1>
-    You're viewing 
-    0
-     
-    expenses
-     totaling 
-    $0
-  </h1>
+<div
+  className="page-header"
+>
+  <div
+    className="content-container"
+  >
+    <h1
+      className="page-header__title"
+    >
+      You're viewing 
+      <span>
+        0
+      </span>
+       
+      expenses
+       totaling
+       
+      <span>
+        $0
+      </span>
+    </h1>
+    <div
+      className="page-header__actions"
+    >
+      <Link
+        className="button"
+        replace={false}
+        to="/create"
+      >
+        Add Expense
+      </Link>
+    </div>
+  </div>
 </div>
 `;
 
 exports[`<ExpenseSummary /> should render summary for 1 expense 1`] = `
-<div>
-  <h1>
-    You're viewing 
-    1
-     
-    expense
-     totaling 
-    $1.23
-  </h1>
+<div
+  className="page-header"
+>
+  <div
+    className="content-container"
+  >
+    <h1
+      className="page-header__title"
+    >
+      You're viewing 
+      <span>
+        1
+      </span>
+       
+      expense
+       totaling
+       
+      <span>
+        $1.23
+      </span>
+    </h1>
+    <div
+      className="page-header__actions"
+    >
+      <Link
+        className="button"
+        replace={false}
+        to="/create"
+      >
+        Add Expense
+      </Link>
+    </div>
+  </div>
 </div>
 `;
 
 exports[`<ExpenseSummary /> should render summary for 2 expenses 1`] = `
-<div>
-  <h1>
-    You're viewing 
-    2
-     
-    expenses
-     totaling 
-    $1.23
-  </h1>
+<div
+  className="page-header"
+>
+  <div
+    className="content-container"
+  >
+    <h1
+      className="page-header__title"
+    >
+      You're viewing 
+      <span>
+        2
+      </span>
+       
+      expenses
+       totaling
+       
+      <span>
+        $1.23
+      </span>
+    </h1>
+    <div
+      className="page-header__actions"
+    >
+      <Link
+        className="button"
+        replace={false}
+        to="/create"
+      >
+        Add Expense
+      </Link>
+    </div>
+  </div>
 </div>
 `;
 
 exports[`<ExpenseSummary /> should render summary for thousands of expenses 1`] = `
-<div>
-  <h1>
-    You're viewing 
-    12,345
-     
-    expenses
-     totaling 
-    $1,234,567.89
-  </h1>
+<div
+  className="page-header"
+>
+  <div
+    className="content-container"
+  >
+    <h1
+      className="page-header__title"
+    >
+      You're viewing 
+      <span>
+        12,345
+      </span>
+       
+      expenses
+       totaling
+       
+      <span>
+        $1,234,567.89
+      </span>
+    </h1>
+    <div
+      className="page-header__actions"
+    >
+      <Link
+        className="button"
+        replace={false}
+        to="/create"
+      >
+        Add Expense
+      </Link>
+    </div>
+  </div>
 </div>
 `;
