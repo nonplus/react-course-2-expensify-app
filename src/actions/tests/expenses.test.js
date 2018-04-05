@@ -1,17 +1,17 @@
-import {
-  addExpense,
-  editExpense,
-  removeExpense,
-  addExpenseAsync,
-  setExpenses,
-  setExpenseAsync,
-  removeExpenseAsync,
-  editExpenseAsync
-} from "../expenses";
 import * as _ from "lodash";
-import expenses from "../../tests/fixtures/expenses";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
+import expenses from "../../tests/fixtures/expenses";
+import {
+  addExpense,
+  addExpenseAsync,
+  editExpense,
+  editExpenseAsync,
+  removeExpense,
+  removeExpenseAsync,
+  setExpenseAsync,
+  setExpenses
+} from "../expenses";
 import database from "../../firebase/firebase";
 
 const createMockStore = configureMockStore([thunk]);
@@ -23,7 +23,7 @@ describe("expenses", () => {
         it("should setup add expense action object with provided values", () => {
           const expense = expenses[1];
           const action = addExpense(expense);
-          expect(addExpense(expense)).toEqual({
+          expect(action).toEqual({
             type: "ADD_EXPENSE",
             expense
           });
@@ -61,7 +61,7 @@ describe("expenses", () => {
       describe("when values are provided", () => {
         it("should setup set expenses action object with provided values", () => {
           const action = setExpenses(expenses);
-          expect(setExpenses(expenses)).toEqual({
+          expect(action).toEqual({
             type: "SET_EXPENSES",
             expenses
           });

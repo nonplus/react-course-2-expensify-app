@@ -1,5 +1,5 @@
-import { selectExpenses } from "../expenses";
 import moment from "moment";
+import { selectExpenses } from "../expenses";
 import expenses from "../../tests/fixtures/expenses";
 
 describe("selectExpenses", () => {

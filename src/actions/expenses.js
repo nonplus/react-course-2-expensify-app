@@ -1,6 +1,5 @@
-import uuid from "uuid";
-import database from "../firebase/firebase";
 import _ from "lodash";
+import database from "../firebase/firebase";
 
 const expensesRef = (getState, path = "") =>
   database.ref(`users/${getState().auth.uid}/expenses/${path}`);

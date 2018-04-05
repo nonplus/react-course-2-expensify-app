@@ -1,5 +1,5 @@
-import filtersReducer, { filtersReducerDefaultState } from "../filters";
 import moment from "moment";
+import filtersReducer, { filtersReducerDefaultState } from "../filters";
 
 describe("filtersReducer", () => {
   describe("@@INIT", () => {

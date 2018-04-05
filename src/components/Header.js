@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { logoutAsync } from "../actions/auth";
 import { connect } from "react-redux";
+import { logoutAsync } from "../actions/auth";
 
 export const Header = ({ logoutAsync }) => (
   <header className="header">

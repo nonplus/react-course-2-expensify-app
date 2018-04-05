@@ -1,8 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
-import expenses from "../../tests/fixtures/expenses";
-import { filters, altFilters } from "../../tests/fixtures/filters";
 import moment from "moment";
+import { altFilters, filters } from "../../tests/fixtures/filters";
 import { ExpenseListFilters } from "../ExpenseListFilters";
 
 describe("<ExpenseListFilters />", () => {

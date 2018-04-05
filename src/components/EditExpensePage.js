@@ -1,7 +1,7 @@
 import React from "react";
-import ExpenseForm from "./ExpenseForm";
 import { connect } from "react-redux";
 import { editExpenseAsync, removeExpenseAsync } from "../actions/expenses";
+import ExpenseForm from "./ExpenseForm";
 
 export const EditExpensePage = ({
   editExpenseAsync,
@@ -23,7 +23,7 @@ export const EditExpensePage = ({
     <div>
       <div className="page-header">
         <div className="content-container">
-          <h1 class="page-header__title">Edit Expense</h1>
+          <h1 className="page-header__title">Edit Expense</h1>
         </div>
       </div>
       <div className="content-container">

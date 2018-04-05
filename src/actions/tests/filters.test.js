@@ -1,10 +1,10 @@
 import moment from "moment";
 import {
-  setStartDate,
   setEndDate,
-  sortByDate,
+  setStartDate,
+  setTextFilter,
   sortByAmount,
-  setTextFilter
+  sortByDate
 } from "../../actions/filters";
 
 describe("setStartDate", () => {

@@ -1,13 +1,9 @@
 import React from "react";
-import ExpenseForm from "./ExpenseForm";
 import { connect } from "react-redux";
 import { addExpenseAsync } from "../actions/expenses";
+import ExpenseForm from "./ExpenseForm";
 
 export class AddExpensePage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   onSubmit = async expense => {
     await this.props.addExpenseAsync(expense);
     this.props.history.push("/");
@@ -18,7 +14,7 @@ export class AddExpensePage extends React.Component {
       <div>
         <div className="page-header">
           <div className="content-container">
-            <h1 class="page-header__title">Add Expense</h1>
+            <h1 className="page-header__title">Add Expense</h1>
           </div>
         </div>
         <div className="content-container">

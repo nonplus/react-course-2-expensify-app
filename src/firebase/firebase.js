@@ -1,6 +1,4 @@
 import * as firebase from "firebase";
-import expenses from "../tests/fixtures/expenses";
-import _ from "lodash";
 
 const config = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -17,15 +15,3 @@ const database = firebase.database();
 const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 export { firebase, googleAuthProvider, database as default };
-
-async function test() {
-  try {
-    await database.ref("attributes").set({
-      height: 180,
-      weight: 98
-    });
-    console.log("Async Data saved!");
-  } catch (err) {
-    console.log("Error:", err);
-  }
-}

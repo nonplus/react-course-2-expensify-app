@@ -1,4 +1,5 @@
 {
+  "parser": "babel-eslint",
   "extends": [
     "standard",
     "plugin:react/recommended",
@@ -11,7 +12,8 @@
     "flowtype",
     "react",
     "prettier",
-    "standard"
+    "standard",
+    "import"
   ],
   "parserOptions": {
     "sourceType": "module",
@@ -20,14 +22,12 @@
     }
   },
   "env": {
-    "node": true
+    "node": true,
+    "jest": true
   },
   "rules": {
     "prettier/prettier": "error",
-    "sort-imports": ["error", {
-      "ignoreCase": false,
-      "ignoreMemberSort": false,
-      "memberSyntaxSortOrder": ["none", "all", "single", "multiple"]
-    }]
+    "import/first": 2,
+    "import/order": ["error", { "groups": ["builtin", "external", "parent", "sibling", "index"]}]
   }
 }
