@@ -50,13 +50,12 @@ describe("<EditExpensePage />", () => {
     const removeExpenseAsyncPromise = Promise.resolve(undefined);
     beforeEach(() => {
       removeExpenseAsync.mockReturnValue(removeExpenseAsyncPromise);
+      wrapper.find("button").prop("onClick")();
     });
     it("should call props.removeExpense(expense)", () => {
-      wrapper.find("button").prop("onClick")();
       expect(removeExpenseAsync).toHaveBeenLastCalledWith({ id: expense.id });
     });
     it("should call history.push('/')", async () => {
-      wrapper.find("button").prop("onClick")();
       await removeExpenseAsyncPromise;
       expect(history.push).toHaveBeenLastCalledWith("/");
     });

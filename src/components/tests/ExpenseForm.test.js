@@ -5,17 +5,23 @@ import ExpenseForm from "../ExpenseForm";
 import expenses from "../../tests/fixtures/expenses";
 
 describe("<ExpenseForm />", () => {
+  const expense = expenses[1];
+  let wrapper;
+  let onSubmit;
+
+  beforeEach(() => {
+    onSubmit = jest.fn();
+    wrapper = shallow(<ExpenseForm expense={expense} onSubmit={onSubmit} />);
+  });
+
   describe("when no expense specified", () => {
     it("should render form with default data", () => {
-      const wrapper = shallow(<ExpenseForm />);
-      expect(wrapper).toMatchSnapshot();
+      expect(shallow(<ExpenseForm />)).toMatchSnapshot();
     });
   });
 
   describe("when expense specified", () => {
     it("should render form with expense data", () => {
-      const expense = expenses[1];
-      const wrapper = shallow(<ExpenseForm expense={expense} />);
       expect(wrapper).toMatchSnapshot();
     });
   });
@@ -24,7 +30,6 @@ describe("<ExpenseForm />", () => {
     describe("onSubmit", () => {
       describe("when description is empty", () => {
         it("should display error message", () => {
-          const wrapper = shallow(<ExpenseForm expense={expenses[1]} />);
           wrapper.setState({ description: "" });
           expect(wrapper).toMatchSnapshot();
           wrapper.find("form").simulate("submit", { preventDefault() {} });
@@ -34,7 +39,6 @@ describe("<ExpenseForm />", () => {
       });
       describe("when amount is empty", () => {
         it("should display error message", () => {
-          const wrapper = shallow(<ExpenseForm expense={expenses[1]} />);
           wrapper.setState({ amount: "" });
           expect(wrapper).toMatchSnapshot();
           wrapper.find("form").simulate("submit", { preventDefault() {} });
@@ -44,11 +48,6 @@ describe("<ExpenseForm />", () => {
       });
       describe("when all values valid", () => {
         it("should call onSubmit callback", () => {
-          const onSubmit = jest.fn();
-          const expense = expenses[1];
-          const wrapper = shallow(
-            <ExpenseForm expense={expense} onSubmit={onSubmit} />
-          );
           expect(wrapper).toMatchSnapshot();
           wrapper.find("form").simulate("submit", { preventDefault() {} });
           expect(wrapper.state("error")).toBe("");
@@ -68,7 +67,6 @@ describe("<ExpenseForm />", () => {
     describe("onChange", () => {
       it("should update state.description", () => {
         const value = "New Description";
-        const wrapper = shallow(<ExpenseForm />);
         wrapper
           .find("input")
           .at(0)
@@ -84,7 +82,6 @@ describe("<ExpenseForm />", () => {
     describe("onChange", () => {
       it("should update state.note", () => {
         const value = "New Note";
-        const wrapper = shallow(<ExpenseForm />);
         wrapper.find("textarea").simulate("change", {
           target: { value }
         });
@@ -94,9 +91,8 @@ describe("<ExpenseForm />", () => {
   });
 
   describe("<input/>[1]", () => {
-    let wrapper, input;
+    let input;
     beforeEach(() => {
-      wrapper = shallow(<ExpenseForm />);
       input = wrapper.find("input").at(1);
     });
     describe("onChange", () => {
@@ -115,26 +111,26 @@ describe("<ExpenseForm />", () => {
           input.simulate("change", {
             target: { value }
           });
-          expect(wrapper.state("amount")).toBe("");
+          expect(wrapper.state("amount")).toBe(String(expense.amount / 100));
         });
       });
     });
   });
 
   describe("<SingleDatePicker />", () => {
-    let wrapper = shallow(<ExpenseForm />);
-    beforeEach(() => (wrapper = shallow(<ExpenseForm />)));
+    let datePicker;
+    beforeEach(() => (datePicker = wrapper.find("SingleDatePicker")));
     describe("onDateChange", () => {
       it("should update state.createdAt", () => {
         const now = moment();
-        wrapper.find("SingleDatePicker").prop("onDateChange")(now);
+        datePicker.prop("onDateChange")(now);
         expect(wrapper.state("createdAt")).toEqual(now);
       });
     });
     describe("onFocusChange", () => {
       it("should update state.calendarFocused", () => {
         const focused = true;
-        wrapper.find("SingleDatePicker").prop("onFocusChange")({ focused });
+        datePicker.prop("onFocusChange")({ focused });
         expect(wrapper.state("calendarFocused")).toEqual(focused);
       });
     });

@@ -26,6 +26,7 @@
     "jest": true
   },
   "rules": {
+    "react/prop-types": 0,
     "prettier/prettier": "error",
     "import/first": 2,
     "import/order": ["error", { "groups": ["builtin", "external", "parent", "sibling", "index"]}]

@@ -9,7 +9,7 @@ exports[`<AddExpensePage /> should render the page correctly 1`] = `
       className="content-container"
     >
       <h1
-        class="page-header__title"
+        className="page-header__title"
       >
         Add Expense
       </h1>

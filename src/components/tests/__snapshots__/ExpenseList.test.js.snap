@@ -1,38 +1,92 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ExpenseList should remder list with expenses 1`] = `
-<div>
-  <ExpenseListItem
-    amount={195}
-    createdAt={0}
-    description="Gum"
-    id="id_1"
-    key="id_1"
-    note=""
-  />
-  <ExpenseListItem
-    amount={109500}
-    createdAt={-345600000}
-    description="Rent"
-    id="id_2"
-    key="id_2"
-    note=""
-  />
-  <ExpenseListItem
-    amount={4500}
-    createdAt={345600000}
-    description="Credit Card"
-    id="id_3"
-    key="id_3"
-    note=""
-  />
+exports[`<ExpenseList /> should remder list with expenses 1`] = `
+<div
+  className="content-container"
+>
+  <div
+    className="list-header"
+  >
+    <div
+      className="mobile-only"
+    >
+      Expenses
+    </div>
+    <div
+      className="desktop-only"
+    >
+      Expense
+    </div>
+    <div
+      className="desktop-only"
+    >
+      Amount
+    </div>
+  </div>
+  <div
+    className="list-body"
+  >
+    <ExpenseListItem
+      amount={195}
+      createdAt={0}
+      description="Gum"
+      id="id_1"
+      key="id_1"
+      note=""
+    />
+    <ExpenseListItem
+      amount={109500}
+      createdAt={-345600000}
+      description="Rent"
+      id="id_2"
+      key="id_2"
+      note=""
+    />
+    <ExpenseListItem
+      amount={4500}
+      createdAt={345600000}
+      description="Credit Card"
+      id="id_3"
+      key="id_3"
+      note=""
+    />
+  </div>
 </div>
 `;
 
-exports[`ExpenseList should show default message with empty expenses 1`] = `
-<div>
-  <p>
-    No expenses.
-  </p>
+exports[`<ExpenseList /> should show default message with empty expenses 1`] = `
+<div
+  className="content-container"
+>
+  <div
+    className="list-header"
+  >
+    <div
+      className="mobile-only"
+    >
+      Expenses
+    </div>
+    <div
+      className="desktop-only"
+    >
+      Expense
+    </div>
+    <div
+      className="desktop-only"
+    >
+      Amount
+    </div>
+  </div>
+  <div
+    className="list-body"
+  >
+    <div
+      className="list-item list-item--message"
+    >
+      <span>
+        No expenses.
+      </span>
+    </div>
+  </div>
 </div>
 `;

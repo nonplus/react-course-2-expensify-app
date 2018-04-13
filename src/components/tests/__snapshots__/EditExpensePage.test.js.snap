@@ -9,7 +9,7 @@ exports[`<EditExpensePage /> should render the page correctly 1`] = `
       className="content-container"
     >
       <h1
-        class="page-header__title"
+        className="page-header__title"
       >
         Edit Expense
       </h1>
@@ -30,14 +30,12 @@ exports[`<EditExpensePage /> should render the page correctly 1`] = `
       }
       onSubmit={[Function]}
     />
-    <div>
-      <button
-        className="button button--secondary"
-        onClick={[Function]}
-      >
-        Remove
-      </button>
-    </div>
+    <button
+      className="button button--secondary"
+      onClick={[Function]}
+    >
+      Remove Expense
+    </button>
   </div>
 </div>
 `;
